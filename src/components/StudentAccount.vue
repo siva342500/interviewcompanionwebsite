@@ -1,4 +1,5 @@
 <template>
+  <AppHeader></AppHeader>
   <div class="app-container">
     <!-- Main Content -->
     <main class="main-content">
@@ -62,7 +63,7 @@ import StudentWalletDetails from "@/components/StudentWallet.vue";
 import StudentPaymentHistory from "@/components/StudentPaymentHistory.vue";
 import ReferAFriend from "@/components/ReferAFriend.vue";
 import StudentContactUs from "@/components/StudentContactUs.vue";
-
+import AppHeader from "@/components/AppHeader.vue";
 export default {
   name: "StudentAccountPage",
   components: {
@@ -71,6 +72,7 @@ export default {
     StudentPaymentHistory,
     ReferAFriend,
     StudentContactUs,
+    AppHeader,
   },
   data() {
     return {
@@ -143,7 +145,7 @@ export default {
 }
 
 /* Header Styling */
-.app-header {
+/* .app-header {
   background-color: #4caf50;
   color: white;
   text-align: center;
@@ -154,7 +156,7 @@ export default {
   font-size: 24px;
   font-weight: bold;
   margin: 0;
-}
+} */
 
 /* Main Content Styling */
 .main-content {

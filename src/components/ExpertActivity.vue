@@ -45,8 +45,21 @@
                 {{ reservation.interview.interview_time }}
                 {{ reservation.interview.time_zone }}
               </td>
-              <td>{{ reservation.interview.skills.skill_name }}</td>
-              <td>${{ reservation.interview.skills.amount }}</td>
+              <td>
+                {{
+                  reservation.interview.skills
+                    ? reservation.interview.skills.skill_name
+                    : "N/A"
+                }}
+              </td>
+              <td>
+                ${{
+                  reservation.interview.skills
+                    ? reservation.interview.skills.amount
+                    : "N/A"
+                }}
+              </td>
+
               <td>
                 <span>{{
                   getClaimStatus(reservation.interview.interview_id)
@@ -108,8 +121,21 @@
                 {{ history.interview.interview_time }}
                 {{ history.interview.time_zone }}
               </td>
-              <td>{{ history.interview.skills.skill_name }}</td>
-              <td>${{ history.interview.skills.amount }}</td>
+              <td>
+                {{
+                  history.interview.skills
+                    ? history.interview.skills.skill_name
+                    : "N/A"
+                }}
+              </td>
+              <td>
+                ${{
+                  history.interview.skills
+                    ? history.interview.skills.amount
+                    : "N/A"
+                }}
+              </td>
+
               <td>
                 <span>{{
                   getClaimStatus(history.interview.interview_id)

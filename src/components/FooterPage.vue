@@ -2,7 +2,7 @@
   <!-- Footer -->
   <footer class="bg-black text-white py-5">
     <div class="container">
-      <!-- Centered Columns: Company, Services, Contact Us -->
+      <!-- Centered Columns: Company, Services, Contact Us, and Social Links -->
       <div class="row justify-content-center">
         <div class="col-md-3 text-center">
           <h5>Company</h5>
@@ -51,33 +51,71 @@
             </li>
           </ul>
         </div>
-        <div class="col-md-3 text-center">
-          <h5>Contact Us</h5>
-          <ul class="list-unstyled">
-            <li>
-              <a href="#" class="text-white text-decoration-none"
-                >Help Center</a
-              >
-            </li>
-            <li>
-              <a href="#" class="text-white text-decoration-none">Support</a>
-            </li>
-            <li>
-              <a href="#" class="text-white text-decoration-none"
-                >Privacy Policy</a
-              >
-            </li>
-          </ul>
+        <!-- Contact Us, Social Links, and Download Buttons -->
+        <div class="col-md-6">
+          <div class="row">
+            <!-- Contact Us Column -->
+            <div class="col-md-6 text-center">
+              <h5>Contact Us</h5>
+              <ul class="list-unstyled">
+                <li>
+                  <a href="#" class="text-white text-decoration-none"
+                    >Help Center</a
+                  >
+                </li>
+                <li>
+                  <a href="#" class="text-white text-decoration-none"
+                    >Support</a
+                  >
+                </li>
+                <li>
+                  <a href="#" class="text-white text-decoration-none"
+                    >Privacy Policy</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <!-- Social Links Column -->
+            <div class="col-md-6 text-center">
+              <h5>Social Links</h5>
+              <div class="social-icons d-flex justify-content-center mt-3">
+                <a href="#" class="text-white me-3"
+                  ><i class="fab fa-facebook"></i
+                ></a>
+                <a href="#" class="text-white me-3"
+                  ><i class="fab fa-twitter"></i
+                ></a>
+                <a href="#" class="text-white me-3"
+                  ><i class="fab fa-instagram"></i
+                ></a>
+                <a href="#" class="text-white"
+                  ><i class="fab fa-linkedin"></i
+                ></a>
+              </div>
+              <button class="btn me-3" @click="navigateToAndroid">
+                <img
+                  src="../../public/andriod app.webp"
+                  alt="Download Android"
+                  style="width: 100px; margin-left: 50px; margin-top: 10px"
+                />
+              </button>
+              <!-- Download iOS Button -->
+              <button class="btn me-3" @click="navigateToIOS">
+                <img
+                  src="../../public/andriod.webp"
+                  alt="Download iOS"
+                  style="width: 100px; margin-left: 50px"
+                />
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- Text Below the Columns -->
+      <!-- Footer Bottom -->
       <div class="text-center mt-4">
         <div class="d-flex justify-content-center align-items-center">
-          <!-- Interview Companion Text -->
           <h5 class="mb-0 me-2">Interview Companion</h5>
-
-          <!-- Logo Image -->
           <img
             src="../../public/logo.jpeg"
             style="
@@ -89,31 +127,31 @@
             alt="Logo"
           />
         </div>
-
-        <!-- Copyright Text Below -->
         <p class="mt-3">
           Copyright © 2025 Interview Companion - All Rights Reserved.
         </p>
-      </div>
-
-      <!-- Social Media and Language/Location -->
-      <div class="d-flex justify-content-start align-items-center mt-4">
-        <div class="social-icons">
-          <a href="#" class="text-white me-3"
-            ><i class="fab fa-facebook"></i
-          ></a>
-          <a href="#" class="text-white me-3"><i class="fab fa-twitter"></i></a>
-          <a href="#" class="text-white me-3"
-            ><i class="fab fa-instagram"></i
-          ></a>
-        </div>
       </div>
     </div>
   </footer>
 </template>
 
+<script>
+export default {
+  methods: {
+    navigateToAndroid() {
+      // Navigate to the Android app page/component
+      this.$router.push("/download-android");
+    },
+    navigateToIOS() {
+      // Navigate to the iOS app page/component
+      this.$router.push("/download-ios");
+    },
+  },
+};
+</script>
+
 <style scoped>
-/* Footer Style */
+/* Footer Styles */
 footer {
   margin-top: 50px;
 }
@@ -140,33 +178,47 @@ footer ul li a:hover {
   text-decoration: underline;
 }
 
+/* Social Icons Styling */
 .social-icons a {
   color: white;
   font-size: 20px;
   margin: 0 10px;
+  transition: color 0.3s;
 }
 
-/* Align social media icons to the left */
-footer .d-flex.justify-content-start {
-  justify-content: flex-start;
+.social-icons a:hover {
+  color: #007bff; /* Hover color */
 }
 
-footer .text-center {
-  margin-top: 20px;
-}
-
-footer .d-flex.justify-content-center {
-  justify-content: center;
-  align-items: center;
-}
-
-/* Add these styles to center the columns in the footer */
-.row.justify-content-center {
+/* Download Buttons Styling */
+button.btn-dark {
+  background-color: black;
+  color: white;
+  font-size: 16px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
   display: flex;
-  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
-.col-md-3 {
-  text-align: left;
+button.btn-dark:hover {
+  background-color: #333;
+}
+
+button.btn-dark img {
+  width: 20px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .social-icons {
+    justify-content: center;
+  }
+  .col-md-6.text-center {
+    margin-bottom: 20px;
+  }
 }
 </style>

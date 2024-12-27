@@ -36,6 +36,7 @@
 
 <script>
 import axios from "axios"; // Import axios directly
+import Swal from "sweetalert2"; // Import SweetAlert2 for better alerts
 
 export default {
   name: "ReferAFriend",
@@ -62,13 +63,30 @@ export default {
 
         // Handling the response from the API
         if (response.data.success) {
-          this.$router.push("/home/1"); // Navigate to success page or show a success message
+          // Show success popup
+          Swal.fire({
+            icon: "success",
+            title: "Referral Sent",
+            text: "Your referral was sent successfully!",
+          });
+
+          // Reset form fields
+          this.countryCode = "";
+          this.phoneNumber = "";
         } else {
-          alert("Failed to refer a friend. Please try again.");
+          Swal.fire({
+            icon: "error",
+            title: "Failed",
+            text: "Failed to refer a friend. Please try again.",
+          });
         }
       } catch (error) {
         console.error("Error submitting referral:", error);
-        alert("There was an error submitting your referral. Please try again.");
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "There was an error submitting your referral. Please try again.",
+        });
       }
     },
   },
@@ -111,8 +129,8 @@ input {
 button.submit-button {
   width: 100%;
   padding: 12px;
-  background-color: #c7c9c7;
-  color: #090909;
+  background-color: #000; /* Black background */
+  color: #fff; /* White text */
   font-size: 16px;
   border: none;
   border-radius: 6px;
@@ -121,6 +139,6 @@ button.submit-button {
 }
 
 button.submit-button:hover {
-  background-color: #767976;
+  background-color: #333;
 }
 </style>

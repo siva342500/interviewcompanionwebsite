@@ -1,4 +1,5 @@
 <template>
+  <HeaderPage></HeaderPage>
   <div class="available-companions-page">
     <!-- Use the HeaderPage component -->
     <!-- <HeaderPage :activePage="activePage" :setActivePage="setActivePage" /> -->
@@ -46,14 +47,14 @@
 </template>
 
 <script>
-// import HeaderPage from "./HeaderPage.vue"; // Import the HeaderPage component
+import HeaderPage from "@/components/AppHeader.vue"; // Import the HeaderPage component
 import axios from "axios";
 
 export default {
   name: "AvailableCompanionPage",
-  // components: {
-  //   HeaderPage, // Declare the component to be used in the template
-  // },
+  components: {
+    HeaderPage, // Declare the component to be used in the template
+  },
   data() {
     return {
       selectedTechnology: "", // Selected technology passed as a query parameter

@@ -26,6 +26,8 @@ import RegistrationForm from "@/components/RegistrationForm.vue";
 import StudentRegister from "@/components/StudentRegister.vue";
 import ExpertRegister from "@/components/ExpertRegister.vue";
 import ServicesPage from "@/components/ServicesPage.vue";
+import DownloadAndriod from "@/components/DownloadAndriod.vue";
+import DownloadIos from "@/components/DownloadIos.vue";
 const routes = [
   {
     path: "/",
@@ -46,6 +48,16 @@ const routes = [
     path: "/about",
     name: "AboutUs",
     component: AboutUs,
+  },
+  {
+    path: "/download-android",
+    name: "DownloadAndriod",
+    component: DownloadAndriod,
+  },
+  {
+    path: "/download-ios",
+    name: "DownloadIos",
+    component: DownloadIos,
   },
   {
     path: "/services-page",

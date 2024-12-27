@@ -1,38 +1,7 @@
 <template>
   <div id="app">
-    <!-- Header Section -->
-    <header class="app-header">
-      <div class="header-content">
-        <i class="fa fa-arrow-left back-arrow"></i>
-        <h1 class="header-title">
-          <span
-            :class="{ active: activePage === 'home' }"
-            @click="setActivePage('home')"
-          >
-            Home
-          </span>
-          <span
-            :class="{ active: activePage === 'notification' }"
-            @click="setActivePage('notification')"
-          >
-            Notification
-          </span>
-          <span
-            :class="{ active: activePage === 'activity' }"
-            @click="setActivePage('activity')"
-          >
-            Activity
-          </span>
-          <span
-            :class="{ active: activePage === 'account' }"
-            @click="setActivePage('account')"
-          >
-            Account
-          </span>
-        </h1>
-        <img src="../../public/logo.jpeg" alt="Logo" class="logo" />
-      </div>
-    </header>
+    <!-- Header Component -->
+    <HeaderComponent :activePage="activePage" @setActivePage="setActivePage" />
 
     <!-- Main Content Section -->
     <main class="main-content">
@@ -99,6 +68,7 @@
 </template>
 
 <script>
+import HeaderComponent from "./AppHeader.vue";
 import StudentNotification from "./StudentNotificationPage.vue";
 import StudentInterviewForm from "./StudentInterviewForm.vue";
 import StudentAccount from "./StudentAccount.vue";
@@ -124,6 +94,7 @@ export default {
     },
   },
   components: {
+    HeaderComponent,
     StudentNotification,
     StudentInterviewForm,
     StudentAccount,
@@ -133,56 +104,11 @@ export default {
 </script>
 
 <style>
-/* (The CSS remains unchanged from your original code) */
-</style>
-
-<style>
 /* Global Styles */
 #app {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-}
-
-/* Header Styling */
-.app-header {
-  --background-color: #000000 !important;
-  --color: rgb(255, 255, 255) !important;
-  display: flex;
-  align-items: center;
-  padding: 10px 20px;
-}
-
-.header-content {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  background-color: #000000;
-  color: rgb(255, 255, 255);
-}
-
-.back-arrow {
-  font-size: 20px;
-  cursor: pointer;
-}
-
-.header-title span {
-  cursor: pointer;
-  padding: 5px 10px;
-  font-size: 18px;
-}
-
-.header-title span.active {
-  background-color: #000000;
-  color: white;
-  border-radius: 5px;
-}
-
-.logo {
-  height: 40px;
-  width: 40px;
-  object-fit: cover;
 }
 
 /* Main Content Styling */

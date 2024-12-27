@@ -1,4 +1,5 @@
 <template>
+  <AppHeader></AppHeader>
   <div class="page-container">
     <div class="content">
       <h1>Confirmed Interviews</h1>
@@ -46,9 +47,13 @@
 
 <script>
 import axios from "axios";
+import AppHeader from "@/components/AppHeader.vue";
+
 export default {
   name: "StudentNotificationPage",
-
+  components: {
+    AppHeader,
+  },
   data() {
     return {
       studentId: localStorage.getItem("studentId"),
@@ -56,9 +61,9 @@ export default {
       interviews: [],
       loading: true,
       studentProfile: {
-        name: "",
-        email: "",
-        contact: "",
+        name: "John Doe",
+        email: "johndoe@example.com",
+        contact: "9876543210",
       },
     };
   },
@@ -99,7 +104,7 @@ export default {
         const response = await axios.post(
           "https://interview-companion-440607.uc.r.appspot.com/api/create-order",
           {
-            amount: amount,
+            amount: amount * 100,
             receipt: `receipt_${interview.interview_id}`,
             student_id: this.studentId,
             interview_id: interview.interview_id,
@@ -124,6 +129,11 @@ export default {
     },
 
     initiatePayment(orderId, interview, amount) {
+      if (typeof window.Razorpay === "undefined") {
+        alert("Razorpay SDK is not loaded");
+        return;
+      }
+
       const options = {
         key: "rzp_test_c0ALHfuoiS0luD",
         amount: amount * 100,
@@ -132,7 +142,6 @@ export default {
         description: `Interview with ${interview.name}`,
         order_id: orderId,
         handler: async (response) => {
-          console.log("Payment Success Response:", response);
           const paymentDetails = {
             payment_id: response.razorpay_payment_id,
             order_id: response.razorpay_order_id,
@@ -142,7 +151,6 @@ export default {
             expert_id: interview.expert_id,
             currency: "INR",
             interview_id: interview.interview_id,
-            payment_status: "successful",
           };
 
           try {
@@ -155,19 +163,22 @@ export default {
                 },
               }
             );
+
             if (storePaymentResponse.status === 200) {
               alert("Payment successful and stored successfully.");
+              this.fetchInterviews();
             } else {
               alert("Failed to store payment details. Please try again.");
             }
           } catch (error) {
+            console.error("Error storing payment details:", error);
             alert("Failed to store payment details. Please try again.");
           }
         },
         prefill: {
           name: this.studentProfile.name,
           email: this.studentProfile.email,
-          phone: this.studentProfile.contact,
+          contact: this.studentProfile.contact,
         },
         theme: {
           color: "#F37254",
@@ -186,20 +197,20 @@ export default {
 
 <style scoped>
 .page-container {
+  padding: 80px 20px 20px; /* Account for fixed header */
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
 }
 
 .content {
   width: 100%;
   max-width: 1200px;
+  margin: 0 auto;
 }
 
 h1 {
   text-align: center;
-  margin-bottom: 20px;
 }
 
 .interview-table {
@@ -215,28 +226,15 @@ h1 {
   text-align: left;
 }
 
-.interview-table th {
-  background-color: #f4f4f4;
-}
-
-.interview-table tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
-
-.interview-table tr:hover {
-  background-color: #f1f1f1;
-}
-
 button {
-  background-color: #28a745;
+  background-color: #0c0e0d;
   color: white;
-  padding: 8px 12px;
   border: none;
-  border-radius: 4px;
+  padding: 8px;
   cursor: pointer;
 }
 
 button:hover {
-  background-color: #218838;
+  background-color: #050605;
 }
 </style>
