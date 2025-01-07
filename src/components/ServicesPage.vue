@@ -7,16 +7,21 @@
       <!-- Toggle Buttons -->
       <div class="text-center mb-4">
         <button
-          class="btn bg-black me-2"
-          style="color: white"
-          :class="{ active: activeService === 'student' }"
+          class="btn me-2"
+          :class="{
+            'bg-black text-white': activeService === 'student',
+            'btn-secondary': activeService !== 'student',
+          }"
           @click="activeService = 'student'"
         >
           Student Services
         </button>
         <button
-          class="btn btn-secondary"
-          :class="{ active: activeService === 'expert' }"
+          class="btn"
+          :class="{
+            'bg-black text-white': activeService === 'expert',
+            'btn-secondary': activeService !== 'expert',
+          }"
           @click="activeService = 'expert'"
         >
           Expert Services
@@ -211,5 +216,24 @@ button.active {
   width: 100%;
   height: auto;
   border-radius: 8px;
+}
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.bg-black {
+  background-color: #050505;
+}
+
+.text-white {
+  color: white;
+}
+
+.btn-secondary {
+  background-color: #e0e0e0;
+  color: #333;
 }
 </style>

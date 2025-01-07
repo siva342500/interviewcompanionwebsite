@@ -1,137 +1,75 @@
 <template>
-  <AppHeader></AppHeader>
   <div class="app-container">
-    <!-- Main Content -->
+    <AppHeader></AppHeader>
     <main class="main-content">
-      <section v-if="!showPersonalDetails && !showWalletDetails && !showReferAFriend && !showContactUs && !showPaymentHistory && !showTermsCondition" class="account-section">
+      <section class="account-section">
         <h1 class="section-title">Student Account</h1>
-
-        <!-- Buttons in a card structure -->
         <div class="button-card">
-          <button class="action-button" @click="showSection('personalDetails')">Personal Details</button>
-          <button class="action-button" @click="showSection('wallet')">Wallet</button>
-          <button class="action-button" @click="showSection('referAFriend')">Refer a Friend</button>
-          <button class="action-button" @click="showSection('paymentHistory')">Payment History</button>
-          <button class="action-button" @click="showSection('contactUs')">Contact Us</button>
-          <a class="terms" @click="showSection('termsCondition')">Terms and Conditions</a>
+          <router-link
+            class="action-button"
+            :to="`/student-personal/${studentId}`"
+            >Personal Details</router-link
+          >
+          <router-link
+            class="action-button"
+            :to="`/student-wallet/${studentId}`"
+            >Wallet</router-link
+          >
+          <router-link class="action-button" :to="`/refer-friend/${studentId}`"
+            >Refer a Friend</router-link
+          >
+          <router-link
+            class="action-button"
+            :to="`/student-payment-history/${studentId}`"
+            >Payment History</router-link
+          >
+          <router-link
+            class="action-button"
+            :to="`/student-contact-us/${studentId}`"
+            >Contact Us</router-link
+          >
         </div>
-          <div class="footer-section">
-          <button class="footer-button logout">Logout</button>
-        </div>
-      </section>
-
-      <!-- Personal Details Component -->
-      <section v-if="showPersonalDetails" class="details-section">
-        <StudentPersonalDetails @closeDetails="closeSection('personalDetails')" />
-      </section>
-
-      <!-- Wallet Details Component -->
-      <section v-if="showWalletDetails" class="details-section">
-        <StudentWalletDetails @closeDetails="closeSection('wallet')" />
-      </section>
-
-      <!-- Refer a Friend Component -->
-      <section v-if="showReferAFriend" class="details-section">
-        <ReferAFriend @closeDetails="closeSection('referAFriend')" />
-      </section>
-
-      <!-- Contact Us Component -->
-      <section v-if="showContactUs" class="details-section">
-        <StudentContactUs @closeDetails="closeSection('contactUs')" />
-      </section>
-
-      <!-- Payment History Component -->
-      <section v-if="showPaymentHistory" class="details-section">
-        <StudentPaymentHistory @closeDetails="closeSection('paymentHistory')" />
-      </section>
-
-      <!-- Terms and Conditions Component -->
-      <section v-if="showTermsCondition" class="details-section">
-        <div class="terms-content">
-          <h2>Terms and Conditions</h2>
-          <p>Detailed information about terms and conditions goes here...</p>
+         <div class="footer-section">
+          <button class="footer-button logout" @click="logout">Logout</button>
         </div>
       </section>
+      
     </main>
   </div>
 </template>
 
 <script>
-// Import the components for Personal Details, Wallet, Payment History, Refer a Friend, and Contact Us
-import StudentPersonalDetails from "@/components/StudentPersonalDetails.vue";
-import StudentWalletDetails from "@/components/StudentWallet.vue";
-import StudentPaymentHistory from "@/components/StudentPaymentHistory.vue";
-import ReferAFriend from "@/components/ReferAFriend.vue";
-import StudentContactUs from "@/components/StudentContactUs.vue";
 import AppHeader from "@/components/AppHeader.vue";
+
 export default {
   name: "StudentAccountPage",
   components: {
-    StudentPersonalDetails,
-    StudentWalletDetails,
-    StudentPaymentHistory,
-    ReferAFriend,
-    StudentContactUs,
     AppHeader,
   },
   data() {
     return {
-      showPersonalDetails: false,
-      showWalletDetails: false,
-      showReferAFriend: false, // New for Refer a Friend
-      showContactUs: false, // New for Contact Us
-      showPaymentHistory: false,
-      showTermsCondition: false,
+      studentId: localStorage.getItem("studentId"), // Get studentId from localStorage
     };
   },
-  methods: {
-    showSection(section) {
-      // Reset all sections visibility
-      this.showPersonalDetails = false;
-      this.showWalletDetails = false;
-      this.showReferAFriend = false;
-      this.showContactUs = false;
-      this.showPaymentHistory = false;
-      this.showTermsCondition = false;
+   methods: {
+    logout() {
+      // You can clear any user session data here if needed
+      localStorage.removeItem("studentId"); // For example, clear studentId from localStorage
 
-      // Enable the selected section
-      if (section === "personalDetails") {
-        this.showPersonalDetails = true;
-      } else if (section === "wallet") {
-        this.showWalletDetails = true;
-      } else if (section === "referAFriend") {
-        this.showReferAFriend = true;
-      } else if (section === "contactUs") {
-        this.showContactUs = true;
-      } else if (section === "paymentHistory") {
-        this.showPaymentHistory = true;
-      } else if (section === "termsCondition") {
-        this.showTermsCondition = true;
-      }
-    },
-    closeSection(section) {
-      if (section === "personalDetails") {
-        this.showPersonalDetails = false;
-      } else if (section === "wallet") {
-        this.showWalletDetails = false;
-      } else if (section === "referAFriend") {
-        this.showReferAFriend = false;
-      } else if (section === "contactUs") {
-        this.showContactUs = false;
-      } else if (section === "paymentHistory") {
-        this.showPaymentHistory = false;
-      } else if (section === "termsCondition") {
-        this.showTermsCondition = false;
-      }
+      // Navigate to the home page
+      this.$router.push("/");
     },
   },
 };
 </script>
 
 <style scoped>
-/* Styling remains unchanged */
+/* Add your styles here */
 </style>
 
+<style scoped>
+/* Add your styles here */
+</style>
 
 <style scoped>
 /* Styling remains the same as your previous styles for wallet and personal details */

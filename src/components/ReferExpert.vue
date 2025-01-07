@@ -16,11 +16,11 @@
 
       <div class="form-group">
         <label for="mobileNumber">Mobile Number</label>
-        <input 
-          type="text" 
-          id="mobileNumber" 
-          v-model="mobileNumber" 
-          placeholder="Enter mobile number" 
+        <input
+          type="text"
+          id="mobileNumber"
+          v-model="mobileNumber"
+          placeholder="Enter mobile number"
           required
         />
       </div>
@@ -55,21 +55,24 @@ export default {
       };
 
       try {
-        const response = await fetch("https://interview-companion-440607.uc.r.appspot.com/api/expert/referral", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": this.token, // Pass the auth token here
-          },
-          body: JSON.stringify(payload),
-        });
+        const response = await fetch(
+          "https://api.interview-companion.com/api/expert/referral",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "auth-token": this.token, // Pass the auth token here
+            },
+            body: JSON.stringify(payload),
+          }
+        );
 
         const data = await response.json();
         if (response.ok) {
           alert("Referral successful!");
           this.resetForm();
         } else {
-          alert(`Error: ${data.message || 'Something went wrong'}`);
+          alert(`Error: ${data.message || "Something went wrong"}`);
         }
       } catch (error) {
         console.error("Error referring expert:", error);

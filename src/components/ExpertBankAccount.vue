@@ -72,7 +72,7 @@ export default {
     async fetchBankDetails() {
       try {
         const response = await axios.get(
-          `https://interview-companion-440607.uc.r.appspot.com/api/bank-accounts/${this.expertId}`,
+          `https://api.interview-companion.com/api/bank-accounts/${this.expertId}`,
           {
             headers: {
               "auth-token": this.token,
@@ -112,7 +112,7 @@ export default {
     async updateBankDetails() {
       try {
         const response = await axios.put(
-          `https://interview-companion-440607.uc.r.appspot.com/api/bank-accounts/${this.expertId}`,
+          `https://api.interview-companion.com/api/bank-accounts/${this.expertId}`,
           {
             accountHolderName: this.bankDetails.account_holder_name,
             accountNumber: this.bankDetails.account_number,

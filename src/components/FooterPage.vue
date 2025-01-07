@@ -128,7 +128,7 @@
           />
         </div>
         <p class="mt-3">
-          Copyright © 2025 Interview Companion - All Rights Reserved.
+          Copyright © 2025 Interview Companion - vv solutions.
         </p>
       </div>
     </div>

@@ -131,7 +131,7 @@ export default {
       if (token && expertId) {
         try {
           const response = await axios.get(
-            `https://interview-companion-440607.uc.r.appspot.com/api/notifications/${expertId}`,
+            `https://api.interview-companion.com/api/notifications/${expertId}`,
             {
               headers: {
                 "auth-token": `${token}`, // Include the token in the Authorization header
@@ -165,7 +165,7 @@ export default {
       if (token) {
         try {
           const response = await axios.post(
-            `https://interview-companion-440607.uc.r.appspot.com/api/interviews/${interviewId}/confirm`,
+            `https://api.interview-companion.com/api/interviews/${interviewId}/confirm`,
             { status: "CONFIRMED" },
             {
               headers: {
@@ -203,7 +203,7 @@ export default {
       if (token) {
         try {
           const response = await axios.post(
-            `https://interview-companion-440607.uc.r.appspot.com/api/interviews/${interviewId}/reject`,
+            `https://api.interview-companion.com/api/interviews/${interviewId}/reject`,
             { status: "CANCELLED" },
             {
               headers: {

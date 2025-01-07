@@ -3,7 +3,7 @@
     <div class="content">
       <h1>Expert Details</h1>
       <p v-if="loading">Loading expert details...</p>
-      
+
       <div v-else>
         <!-- Expert Details Form -->
         <form>
@@ -41,7 +41,7 @@
               class="form-control"
               :disabled="true"
             />
-          </div>              
+          </div>
         </form>
         <p v-if="message" class="error-message">{{ message }}</p>
       </div>
@@ -84,7 +84,7 @@ export default {
     async fetchExpertDetails() {
       try {
         const response = await axios.get(
-          `https://interview-companion-440607.uc.r.appspot.com/api/experts/${this.expertId}`,
+          `https://api.interview-companion.com/api/experts/${this.expertId}`,
           {
             headers: {
               "auth-token": this.token,
@@ -102,7 +102,7 @@ export default {
             name: response.data.name,
             email: response.data.email,
             phone: response.data.phone,
-                    
+
             skills: JSON.parse(response.data.skills), // Parse the skills JSON
           };
         } else {
@@ -110,7 +110,10 @@ export default {
           this.message = "Expert details not found.";
         }
       } catch (error) {
-        console.error("Error fetching expert details:", error.response?.data || error);
+        console.error(
+          "Error fetching expert details:",
+          error.response?.data || error
+        );
         this.message = "Error loading expert details. Please try again.";
       } finally {
         this.loading = false;

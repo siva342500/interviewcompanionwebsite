@@ -1,4 +1,5 @@
 <template>
+  <AppHeader></AppHeader>
   <div>
     <h2>Send a Message</h2>
     <form @submit.prevent="sendMessage">
@@ -29,8 +30,11 @@
 <script>
 import Swal from "sweetalert2"; // Import SweetAlert2
 import axios from "axios";
-
+import AppHeader from "./AppHeader.vue";
 export default {
+   components: {
+    AppHeader,
+  },
   data() {
     return {
       subject: "",
@@ -53,7 +57,7 @@ export default {
 
       try {
         const apiUrl =
-          "https://interview-companion-440607.uc.r.appspot.com/api/send-whatsapp-message";
+          "https://api.interview-companion.com/api/send-whatsapp-message";
 
         const payload = {
           subject: this.subject,

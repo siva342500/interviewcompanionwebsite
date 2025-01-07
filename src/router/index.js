@@ -160,7 +160,7 @@ const routes = [
     component: ReferAFriend,
   },
   {
-    path: "/refer-friend/:studentId",
+    path: "/student-contact-us/:studentId",
     name: "StudentContactUs",
     component: StudentContactUs,
   },

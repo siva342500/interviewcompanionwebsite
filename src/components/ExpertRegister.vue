@@ -185,7 +185,7 @@ export default {
 
         // API POST request
         const response = await axios.post(
-          "https://interview-companion-440607.uc.r.appspot.com/api/experts",
+          "https://api.interview-companion.com/api/experts",
           payload
         );
 

@@ -70,17 +70,17 @@ export default {
   methods: {
     parseSkills(skills) {
       try {
-        return JSON.parse(skills) || [];
+        const parsedSkills = JSON.parse(skills);
+        return Array.isArray(parsedSkills) ? parsedSkills : [];
       } catch (e) {
         console.error("Error parsing skills:", e);
         return [];
       }
     },
-
     async fetchInterviews() {
       try {
         const response = await axios.get(
-          `https://interview-companion-440607.uc.r.appspot.com/api/interviews/confirmed-experts/${this.studentId}`,
+          `https://api.interview-companion.com/api/interviews/confirmed-experts/${this.studentId}`,
           {
             headers: {
               "auth-token": `${this.authToken}`,
@@ -102,7 +102,7 @@ export default {
       const amount = interview.amount || 1;
       try {
         const response = await axios.post(
-          "https://interview-companion-440607.uc.r.appspot.com/api/create-order",
+          "https://api.interview-companion.com/api/create-order",
           {
             amount: amount * 100,
             receipt: `receipt_${interview.interview_id}`,
@@ -155,7 +155,7 @@ export default {
 
           try {
             const storePaymentResponse = await axios.post(
-              "https://interview-companion-440607.uc.r.appspot.com/api/store-payment",
+              "https://api.interview-companion.com/api/store-payment",
               paymentDetails,
               {
                 headers: {
@@ -236,5 +236,38 @@ button {
 
 button:hover {
   background-color: #050605;
+}
+
+@media (max-width: 768px) {
+  .interview-table {
+    font-size: 12px;
+  }
+  .interview-table th,
+  .interview-table td {
+    padding: 8px;
+  }
+}
+
+@media (max-width: 576px) {
+  .interview-table {
+    font-size: 10px;
+  }
+  .interview-table th,
+  .interview-table td {
+    padding: 6px;
+  }
+  .content {
+    padding: 10px;
+  }
+}
+
+@media (max-width: 360px) {
+  .interview-table {
+    display: block;
+    overflow-x: auto;
+  }
+  .content {
+    padding: 5px;
+  }
 }
 </style>

@@ -1,4 +1,5 @@
 <template>
+  <AppHeader></AppHeader>
   <div class="student-profile-container">
     <!-- Payment History -->
     <div class="payment-history" v-if="paymentHistory.length > 0">
@@ -42,8 +43,11 @@
 
 <script>
 import axios from "axios";
-
+import AppHeader from "./AppHeader.vue";
 export default {
+   components: {
+    AppHeader,
+  },
   data() {
     return {
       studentId: null, // Student ID from route params
@@ -72,7 +76,7 @@ export default {
     // Fetch Payment History
     async fetchPaymentHistory() {
       const token = localStorage.getItem("token"); // Get auth token from localStorage
-      const apiUrl = `https://interview-companion-440607.uc.r.appspot.com/api/payments/student/${this.studentId}`;
+      const apiUrl = `https://api.interview-companion.com/api/payments/student/${this.studentId}`;
 
       if (token && this.studentId) {
         try {

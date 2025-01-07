@@ -1,7 +1,9 @@
 <template>
   <AppHeader></AppHeader>
   <div>
-    <h1>Your Activity</h1>
+    <div class="heading-container">
+      <h1>Your Activity</h1>
+    </div>
 
     <!-- Button Controls for Switching Between Sections -->
     <div class="row button-group">
@@ -10,7 +12,7 @@
           <button
             @click="setActiveTab('activeReservations')"
             :class="{ active: activeTab === 'activeReservations' }"
-            class="btn bg-black"
+            class="btn"
           >
             Active Reservations
           </button>
@@ -175,7 +177,7 @@ import axios from "axios";
 import AppHeader from "@/components/AppHeader.vue";
 export default {
   components: {
-       AppHeader,
+    AppHeader,
   },
   data() {
     return {
@@ -230,7 +232,7 @@ export default {
         }
 
         const response = await axios.get(
-          `https://interview-companion-440607.uc.r.appspot.com/api/mappings/student/${this.studentId}`,
+          `https://api.interview-companion.com/api/mappings/student/${this.studentId}`,
           {
             headers: {
               "auth-token": token,
@@ -264,7 +266,7 @@ export default {
     async fetchRatings() {
       try {
         const response = await axios.get(
-          `https://interview-companion-440607.uc.r.appspot.com/api/ratings/student/${this.studentId}`
+          `https://api.interview-companion.com/api/ratings/student/${this.studentId}`
         );
         if (response.data.ratings) {
           this.ratingsData = response.data.ratings;
@@ -343,48 +345,47 @@ export default {
     },
 
     async submitRating() {
-  try {
-    if (this.rating < 1 || this.rating > 5) {
-      alert("Please provide a rating between 1 and 5.");
-      return;
-    }
+      try {
+        if (this.rating < 1 || this.rating > 5) {
+          alert("Please provide a rating between 1 and 5.");
+          return;
+        }
 
-    const token = localStorage.getItem("token");
+        const token = localStorage.getItem("token");
 
-    if (!token) {
-      alert("Authorization token is missing. Please log in.");
-      this.$router.push({ name: "Login" });
-      return;
-    }
+        if (!token) {
+          alert("Authorization token is missing. Please log in.");
+          this.$router.push({ name: "Login" });
+          return;
+        }
 
-    const response = await axios.post(
-      `https://interview-companion-440607.uc.r.appspot.com/api/rate`,
-      {
-        interview_id: this.selectedReservation.interview.interview_id,
-        student_id: this.studentId,
-        expert_id: this.expertId,
-        rating: this.rating,
-        comment: this.comment,
-      },
-      {
-        headers: {
-          "auth-token": token, // Include the auth token in the headers
-        },
+        const response = await axios.post(
+          `https://api.interview-companion.com/api/rate`,
+          {
+            interview_id: this.selectedReservation.interview.interview_id,
+            student_id: this.studentId,
+            expert_id: this.expertId,
+            rating: this.rating,
+            comment: this.comment,
+          },
+          {
+            headers: {
+              "auth-token": token, // Include the auth token in the headers
+            },
+          }
+        );
+
+        if (response.data) {
+          alert("Your rating has been submitted.");
+          this.fetchStudentActivity(); // Refresh activity data
+          this.closeRatingModal(); // Close modal after submission
+        } else {
+          alert("Failed to submit rating.");
+        }
+      } catch (error) {
+        console.error("Error submitting rating:", error);
       }
-    );
-
-    if (response.data) {
-      alert("Your rating has been submitted.");
-      this.fetchStudentActivity(); // Refresh activity data
-      this.closeRatingModal(); // Close modal after submission
-    } else {
-      alert("Failed to submit rating.");
-    }
-  } catch (error) {
-    console.error("Error submitting rating:", error);
-  }
-},
-
+    },
   },
 
   mounted() {
@@ -397,22 +398,37 @@ export default {
 .button-group {
   margin-top: 20px;
 }
+
 .btn.active {
   background-color: #000;
   color: #fff;
 }
+
 .pagination {
   margin-top: 20px;
 }
+
 .pagination button {
   margin: 0 5px;
 }
+
 .rate-btn {
   background-color: green;
   color: white;
   padding: 5px 10px;
   cursor: pointer;
 }
+.heading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+h1 {
+  text-align: center; /* Ensure text is centered */
+}
+
 .modal {
   position: fixed;
   top: 0;
@@ -424,9 +440,158 @@ export default {
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.5);
 }
+
 .modal-content {
   background-color: white;
   padding: 20px;
   border-radius: 10px;
+}
+
+/* Responsive Styles */
+
+/* Mobile */
+@media only screen and (max-width: 767px) {
+  .btn {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .button-group {
+    margin-top: 10px;
+  }
+
+  .row {
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .pagination {
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .pagination button {
+    margin: 0 5px;
+    padding: 5px 10px;
+  }
+
+  .modal-content {
+    width: 90%;
+    padding: 10px;
+  }
+
+  .table {
+    font-size: 12px;
+  }
+
+  .rate-btn {
+    font-size: 14px;
+    padding: 5px 10px;
+  }
+
+  /* Adjust table content */
+  table th,
+  table td {
+    padding: 8px 5px;
+  }
+
+  h1,
+  h2 {
+    font-size: 18px;
+  }
+
+  .pagination button {
+    padding: 5px;
+  }
+}
+
+/* Tablet */
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+  .btn {
+    width: 48%;
+    margin-bottom: 10px;
+  }
+
+  .button-group {
+    margin-top: 15px;
+  }
+
+  .pagination {
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .pagination button {
+    margin: 0 5px;
+    padding: 7px 15px;
+  }
+
+  .modal-content {
+    width: 70%;
+    padding: 20px;
+  }
+
+  .rate-btn {
+    font-size: 16px;
+    padding: 8px 15px;
+  }
+  .centered-heading {
+    text-align: center;
+    margin-top: 20px; /* Optional, for some spacing */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  table th,
+  table td {
+    padding: 10px;
+  }
+
+  h1,
+  h2 {
+    font-size: 20px;
+  }
+}
+
+/* Desktop */
+@media only screen and (min-width: 1025px) {
+  .btn {
+    width: auto;
+    margin-bottom: 0;
+  }
+
+  .button-group {
+    margin-top: 20px;
+  }
+
+  .pagination {
+    margin-top: 20px;
+  }
+
+  .pagination button {
+    margin: 0 10px;
+    padding: 10px 20px;
+  }
+
+  .modal-content {
+    width: 50%;
+    padding: 20px;
+  }
+
+  .rate-btn {
+    font-size: 18px;
+    padding: 10px 20px;
+  }
+
+  table th,
+  table td {
+    padding: 15px 20px;
+  }
+
+  h1,
+  h2 {
+    font-size: 24px;
+  }
 }
 </style>

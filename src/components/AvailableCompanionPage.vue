@@ -76,7 +76,7 @@ export default {
         this.isLoading = true; // Start loading
         const token = localStorage.getItem("token"); // Get the token from localStorage
         const response = await axios.get(
-          `https://interview-companion-440607.uc.r.appspot.com/api/experts/skill_name/${this.selectedTechnology}`,
+          `https://api.interview-companion.com/api/experts/skill_name/${this.selectedTechnology}`,
           {
             headers: {
               "auth-token": token, // Pass token in headers
@@ -131,7 +131,7 @@ export default {
         const notifications = await Promise.all(
           payloadArray.map(async (payload) => {
             const response = await axios.post(
-              "https://interview-companion-440607.uc.r.appspot.com/api/notifications/send",
+              "https://api.interview-companion.com/api/notifications/send",
               payload,
               {
                 headers: {

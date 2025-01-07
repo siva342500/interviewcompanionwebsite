@@ -108,8 +108,7 @@ export default {
         return;
       }
       try {
-        const apiUrl =
-          "https://interview-companion-440607.uc.r.appspot.com/api/send-otp";
+        const apiUrl = "https://api.interview-companion.com/api/send-otp";
 
         // Send OTP to mobile number for both student and expert
         const response = await axios.post(apiUrl, {
@@ -134,8 +133,7 @@ export default {
     async verifyOtp() {
       this.clearMessages(); // Clear previous messages
       try {
-        const apiUrl =
-          "https://interview-companion-440607.uc.r.appspot.com/api/verify-otp";
+        const apiUrl = "https://api.interview-companion.com/api/verify-otp";
 
         // Retrieve the JWT token from localStorage (or Vuex if using it for state management)
         const token = localStorage.getItem("token"); // Assuming the token is stored as 'token'
@@ -182,7 +180,7 @@ export default {
     // async verifyOtp() {
     //   this.clearMessages();
     //   try {
-    //     const apiUrl = "`https://interview-companion-440607.uc.r.appspot.com/api/verify-otp";
+    //     const apiUrl = "`https://api.interview-companion.com/api/verify-otp";
 
     //     // Send OTP verification request
     //     const response = await axios.post(apiUrl, {
@@ -213,7 +211,7 @@ export default {
     async checkExpertPhoneExistence() {
       this.clearMessages();
       try {
-        const expertApi = `https://interview-companion-440607.uc.r.appspot.com/api/experts/check-phone/${this.form.phone}`;
+        const expertApi = `https://api.interview-companion.com/api/experts/check-phone/${this.form.phone}`;
 
         const response = await axios.get(expertApi);
 
@@ -253,7 +251,7 @@ export default {
     async checkStudentPhoneExistence() {
       this.clearMessages();
       try {
-        const studentApi = `https://interview-companion-440607.uc.r.appspot.com/api/students/check-phone/${this.form.phone}`;
+        const studentApi = `https://api.interview-companion.com/api/students/check-phone/${this.form.phone}`;
 
         const response = await axios.get(studentApi);
 

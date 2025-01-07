@@ -236,7 +236,7 @@ export default {
       try {
         // Fetching active and history activities using the same API but filtered
         const response = await axios.get(
-          `https://interview-companion-440607.uc.r.appspot.com/api/mappings/expert/${this.expertId}`,
+          `https://api.interview-companion.com/api/mappings/expert/${this.expertId}`,
           { headers: { "auth-token": this.token } }
         );
         if (response.data.success) {
@@ -252,7 +252,7 @@ export default {
     async fetchClaims() {
       try {
         const response = await axios.get(
-          `https://interview-companion-440607.uc.r.appspot.com/api/claims/expert/${this.expertId}`,
+          `https://api.interview-companion.com/api/claims/expert/${this.expertId}`,
           { headers: { "auth-token": this.token } }
         );
         if (response.data.success) {
@@ -300,7 +300,7 @@ export default {
 
       try {
         const response = await axios.post(
-          `https://interview-companion-440607.uc.r.appspot.com/api/claims`,
+          `https://api.interview-companion.com/api/claims`,
           claimData,
           { headers: { "auth-token": this.token } }
         );

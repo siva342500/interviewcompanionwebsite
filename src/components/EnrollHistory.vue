@@ -27,7 +27,7 @@ export default {
     async fetchSkills() {
       try {
         const response = await fetch(
-          `https://interview-companion-440607.uc.r.appspot.com/api/experts/${this.expertId}/skills`,
+          `https://api.interview-companion.com/api/experts/${this.expertId}/skills`,
           {
             headers: { "auth-token": `${this.token}` },
           }
@@ -36,28 +36,28 @@ export default {
         console.log("API response:", data);
 
         if (data.skills && Array.isArray(data.skills)) {
-          this.enrolledSkills = data.skills.map(skill => {
+          this.enrolledSkills = data.skills.map((skill) => {
             // Clean up escape characters and extra spaces
-            return skill.replace(/\\|"/g, '').trim();
+            return skill.replace(/\\|"/g, "").trim();
           });
         } else {
           this.enrolledSkills = [];
         }
       } catch (error) {
         console.error("Error fetching skills:", error);
-        this.enrolledSkills = [];  // Set empty array in case of a fetch error
+        this.enrolledSkills = []; // Set empty array in case of a fetch error
       }
     },
 
     async deleteSkill(skill) {
       try {
         const response = await fetch(
-          `https://interview-companion-440607.uc.r.appspot.com/api/experts/skills/${this.expertId}/${skill}`,
+          `https://api.interview-companion.com/api/experts/skills/${this.expertId}/${skill}`,
           {
             method: "DELETE",
             headers: {
               "Content-Type": "application/json",
-              'auth-token': `${this.token}`,
+              "auth-token": `${this.token}`,
             },
           }
         );

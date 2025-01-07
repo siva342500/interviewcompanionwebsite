@@ -97,7 +97,7 @@ export default {
     async fetchSkills() {
       try {
         const response = await axios.get(
-          "https://interview-companion-440607.uc.r.appspot.com/api/skills"
+          "https://api.interview-companion.com/api/skills"
         );
         this.skills = response.data; // Assuming the skills data is in the root of the response
       } catch (error) {
@@ -112,7 +112,7 @@ export default {
       try {
         const token = localStorage.getItem("token"); // Get the token from localStorage
         const response = await axios.get(
-          `https://interview-companion-440607.uc.r.appspot.com/api/experts/skill_name/${this.selectedTechnology}`,
+          `https://api.interview-companion.com/api/experts/skill_name/${this.selectedTechnology}`,
           {
             headers: {
               "auth-token": token, // Pass token in headers
@@ -158,7 +158,7 @@ export default {
 
         // Send the interview data to the API to create the interview
         const response = await axios.post(
-          "https://interview-companion-440607.uc.r.appspot.com/api/interviews/create",
+          "https://api.interview-companion.com/api/interviews/create",
           interviewData,
           {
             headers: {

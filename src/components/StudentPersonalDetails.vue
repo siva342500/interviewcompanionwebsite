@@ -1,4 +1,5 @@
 <template>
+  <AppHeader></AppHeader>
   <div>
     <!-- Header Section -->
     <div class="header">
@@ -20,8 +21,12 @@
 
 <script>
 import axios from "axios";
+import AppHeader from "./AppHeader.vue";
 
 export default {
+   components: {
+    AppHeader,
+  },
   data() {
     return {
       studentId: null,
@@ -42,7 +47,7 @@ export default {
 
       if (token && studentId) {
         try {
-          const apiUrl = `https://interview-companion-440607.uc.r.appspot.com/api/students/${studentId}`;
+          const apiUrl = `https://api.interview-companion.com/api/students/${studentId}`;
 
           const response = await axios.get(apiUrl, {
             headers: {

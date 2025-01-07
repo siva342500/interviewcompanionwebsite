@@ -1,4 +1,5 @@
 <template>
+  <AppHeader></AppHeader>
   <div class="refer-a-friend">
     <h2>Refer a Friend</h2>
     <form @submit.prevent="submitReferralForm">
@@ -37,9 +38,12 @@
 <script>
 import axios from "axios"; // Import axios directly
 import Swal from "sweetalert2"; // Import SweetAlert2 for better alerts
-
-export default {
+import AppHeader from "./AppHeader.vue";
+export default {  
   name: "ReferAFriend",
+   components: {
+    AppHeader,
+  },
   data() {
     return {
       countryCode: "", // Store the selected country code
@@ -54,7 +58,7 @@ export default {
       try {
         // Use the imported axios directly
         const response = await axios.post(
-          "https://interview-companion-440607.uc.r.appspot.com/api/referrals",
+          "https://api.interview-companion.com/api/referrals",
           {
             student_id: this.studentId,
             referred_phone: fullPhoneNumber,

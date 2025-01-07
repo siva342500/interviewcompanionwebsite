@@ -56,7 +56,7 @@ export default {
     async fetchSkills() {
       try {
         const response = await fetch(
-          "https://interview-companion-440607.uc.r.appspot.com/api/skills"
+          "https://api.interview-companion.com/api/skills"
         );
         const data = await response.json();
         this.skills = data;
@@ -84,7 +84,7 @@ export default {
       if (token && expertId) {
         try {
           const response = await axios.post(
-            "https://interview-companion-440607.uc.r.appspot.com/api/experts/multiple-skills",
+            "https://api.interview-companion.com/api/experts/multiple-skills",
             {
               expert_id: expertId,
               skill_names: selectedSkillNames,
