@@ -82,7 +82,7 @@ export default {
 
           // Make the API call to send the link
           const response = await axios.post(
-            "http://localhost:8000/api/send-link-ios",
+            "https://api.interview-companion.com/api/send-link-ios",
             data
           );
 
