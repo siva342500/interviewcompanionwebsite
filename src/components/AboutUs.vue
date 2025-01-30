@@ -112,12 +112,12 @@ export default {
 
 .about-us h1 {
   font-weight: bold;
-  color: #333;
+  color: black;
 }
 
 .about-us h2 {
   font-weight: 600;
-  color: #007bff;
+  color: black;
 }
 
 .about-us p {

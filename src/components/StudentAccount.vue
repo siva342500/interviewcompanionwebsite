@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <AppHeader></AppHeader>
+    <AppHeader :notificationCount="notificationCount"></AppHeader>
     <main class="main-content">
       <section class="account-section">
         <h1 class="section-title">Student Account</h1>
@@ -29,11 +29,10 @@
             >Contact Us</router-link
           >
         </div>
-         <div class="footer-section">
+        <div class="footer-section">
           <button class="footer-button logout" @click="logout">Logout</button>
         </div>
       </section>
-      
     </main>
   </div>
 </template>
@@ -49,9 +48,14 @@ export default {
   data() {
     return {
       studentId: localStorage.getItem("studentId"), // Get studentId from localStorage
+      notificationCount: 0,
     };
   },
-   methods: {
+  created() {
+    const storedCount = localStorage.getItem("notificationCount");
+    this.notificationCount = storedCount ? parseInt(storedCount, 10) : 0; // Get count from local storage
+  },
+  methods: {
     logout() {
       // You can clear any user session data here if needed
       localStorage.removeItem("studentId"); // For example, clear studentId from localStorage

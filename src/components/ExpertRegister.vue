@@ -156,7 +156,7 @@ export default {
     return {
       expert: {
         name: "",
-        email: "",
+       email: this.$route.query.email || "",
         countryCode: "+91",
         phone: "",
         referral_code: "",

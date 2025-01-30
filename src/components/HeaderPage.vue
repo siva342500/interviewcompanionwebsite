@@ -40,11 +40,19 @@
               >About Us</router-link
             >
           </li>
+           <li class="nav-item">
+            <router-link
+              to="/pricing"
+              class="nav-link"
+              :class="{ active: $route.path === '/pricing' }"
+              >Pricing</router-link
+            >
+          </li>
           <li class="nav-item">
             <router-link
-              to="/login"
+              to="/login-page"
               class="nav-link"
-              :class="{ active: $route.path === '/login' }"
+              :class="{ active: $route.path === '/login-page' }"
             >
               Login
             </router-link>

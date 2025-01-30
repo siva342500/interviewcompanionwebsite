@@ -1,5 +1,5 @@
 <template>
-  <AppHeader></AppHeader>
+  <AppHeader :notificationCount="notificationCount"></AppHeader>
   <div class="page-container">
     <div class="content">
       <h1>Confirmed Interviews</h1>
@@ -59,6 +59,7 @@ export default {
       studentId: localStorage.getItem("studentId"),
       authToken: localStorage.getItem("token"),
       interviews: [],
+      notificationCount: 0,
       loading: true,
       studentProfile: {
         name: "John Doe",
@@ -89,6 +90,8 @@ export default {
         );
         if (response.data) {
           this.interviews = response.data;
+          this.notificationCount = response.data.length;
+          localStorage.setItem("notificationCount", this.notificationCount);
         }
       } catch (error) {
         console.error("Error fetching interviews:", error);

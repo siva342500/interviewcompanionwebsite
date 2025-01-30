@@ -103,7 +103,7 @@ export default {
     return {
       student: {
         name: "",
-        email: "",
+        email: this.$route.query.email || "",
         countryCode: "+91",
         mobile: "",
       },

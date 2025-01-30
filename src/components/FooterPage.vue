@@ -64,15 +64,38 @@
                   >
                 </li>
                 <li>
-                  <a href="#" class="text-white text-decoration-none"
+                  <!-- <a href="#" class="text-white text-decoration-none"
                     >Support</a
-                  >
+                  > -->
+                  <router-link to="/contact" class="text-white text-decoration-none">
+    Support
+  </router-link>
                 </li>
                 <li>
-                  <a href="#" class="text-white text-decoration-none"
-                    >Privacy Policy</a
-                  >
-                </li>
+  <router-link
+    to="/terms-and-conditions"
+    class="text-white text-decoration-none"
+  >
+    Terms and Conditions
+  </router-link>
+</li>
+    <li>
+  <router-link
+    to="/cancellation"
+    class="text-white text-decoration-none"
+  >
+    Cancellation And Refund
+  </router-link>
+</li>
+              <li>
+  <router-link
+    to="/privacy-policy"
+    class="text-white text-decoration-none"
+  >
+    Privacy Policy
+  </router-link>
+</li>
+
               </ul>
             </div>
             <!-- Social Links Column -->
@@ -128,7 +151,7 @@
           />
         </div>
         <p class="mt-3">
-          Copyright © 2025 Interview Companion - vv solutions.
+          Copyright © 2025 Interview Companion - vv solutions.All Rights Reserved.
         </p>
       </div>
     </div>

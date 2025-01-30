@@ -39,7 +39,11 @@
                   >
                     Confirm Interview
                   </button>
-                  <button @click="showRejectDialog(notification.interview_id)">
+
+                  <button
+                    @click="showRejectDialog(notification.interview_id)"
+                    style="margin-top: 10px"
+                  >
                     Reject Interview
                   </button>
                 </td>
@@ -318,5 +322,148 @@ button:hover {
 
 .modal-content button {
   margin: 10px;
+}
+ .page-container {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+}
+
+.notification-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.notification-table th,
+.notification-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.notification-table th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+button {
+  background-color: #6f7174;
+  color: #fff;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+button:hover {
+  background-color: #808284;
+}
+
+.pagination {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pagination button {
+  margin: 0 10px;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+.modal-content button {
+  margin: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .notification-table th,
+  .notification-table td {
+    font-size: 14px;
+    padding: 6px;
+  }
+
+  .content {
+    padding: 10px;
+  }
+
+  .notification-table {
+    font-size: 12px;
+  }
+
+  button {
+    padding: 5px 8px;
+    font-size: 12px;
+  }
+
+  .pagination {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 576px) {
+  .page-container {
+    flex-direction: column;
+  }
+
+  .notification-table th,
+  .notification-table td {
+    font-size: 12px;
+    padding: 4px;
+  }
+
+  button {
+    padding: 4px 6px;
+    font-size: 10px;
+  }
+
+  .modal-content {
+    width: 90%;
+    padding: 15px;
+  }
+}
+
+@media (max-width: 360px) {
+  .content {
+    padding: 5px;
+  }
+
+  button {
+    padding: 3px 5px;
+    font-size: 9px;
+  }
+
+  .notification-table th,
+  .notification-table td {
+    font-size: 10px;
+    padding: 3px;
+  }
 }
 </style>

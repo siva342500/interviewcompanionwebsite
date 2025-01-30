@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <!-- Header Component -->
-    <HeaderComponent :activePage="activePage" @setActivePage="setActivePage" />
+    <HeaderComponent :activePage="activePage" @setActivePage="setActivePage" :notificationCount="notificationCount" />
 
     <!-- Main Content Section -->
     <main class="main-content">
@@ -81,7 +81,12 @@ export default {
       activePage: "home", // Default active page
       showOnlyInterviewForm: false, // Controls visibility of only StudentInterviewForm
       selectedQuaram: null, // Holds the quaram value to pass
+      notificationCount: 0,
     };
+  },
+    created() {
+    const storedCount = localStorage.getItem("notificationCount");
+    this.notificationCount = storedCount ? parseInt(storedCount, 10) : 0; // Get count from local storage
   },
   methods: {
     setActivePage(page) {

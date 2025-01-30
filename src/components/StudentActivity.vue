@@ -1,5 +1,5 @@
 <template>
-  <AppHeader></AppHeader>
+  <AppHeader :notificationCount="notificationCount"></AppHeader>
   <div>
     <div class="heading-container">
       <h1>Your Activity</h1>
@@ -40,7 +40,7 @@
             <th>Technology</th>
             <th>Expert Name</th>
             <th>Payment Status</th>
-            <th>Action</th>
+            <!-- <th>Action</th> -->
           </tr>
         </thead>
         <tbody>
@@ -53,14 +53,14 @@
             <td>{{ item.interview.skills?.skill_name || "N/A" }}</td>
             <td>{{ item.expert.name }}</td>
             <td>{{ item.payment.status }}</td>
-            <td>
+            <!-- <td>
               <button
                 @click="handleCancelReservation(item)"
                 class="btn btn-danger"
               >
                 Cancel Reservation
               </button>
-            </td>
+            </td> -->
           </tr>
         </tbody>
       </table>
@@ -187,6 +187,7 @@ export default {
       studentId: 1, // Example student ID (replace with dynamic ID if needed)
       currentReservedHistoryPage: 1,
       currentActiveReservationsPage: 1,
+      notificationCount: 0,
       itemsPerPage: 5,
       showRatingModal: false,
       selectedReservation: null,
@@ -195,6 +196,11 @@ export default {
       expertId: null, // Will store expert_id
       ratingsData: [], // Store ratings data
     };
+    
+  },
+   created() {
+    const storedCount = localStorage.getItem("notificationCount");
+    this.notificationCount = storedCount ? parseInt(storedCount, 10) : 0; // Get count from local storage
   },
   computed: {
     totalReservedHistoryPages() {

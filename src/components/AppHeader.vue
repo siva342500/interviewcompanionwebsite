@@ -13,8 +13,9 @@
           :class="{ active: activePage === 'notification' }"
           @click="navigate('student-notification')"
         >
-          Notification
+          Notification {{ notificationCount }}
         </span>
+
         <span
           :class="{ active: activePage === 'activity' }"
           @click="navigate('student-activity')"
@@ -46,6 +47,10 @@ export default {
     activePage: {
       type: String,
       required: true,
+    },
+    notificationCount: {
+      type: Number,
+      default: 0,
     },
   },
   methods: {

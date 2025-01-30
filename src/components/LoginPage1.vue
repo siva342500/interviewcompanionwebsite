@@ -2,7 +2,8 @@
   <div>
     <Header></Header>
     <div class="login-container">
-      <h1>Login</h1> <h1>{{ userType === 'student' ? 'Student Login' : 'Expert Login' }}</h1>
+     <h3>{{ userType === 'student' ? 'Login With Student' : 'Login With Expert' }}</h3>
+
       <div class="user-type-selection">
         <button
           :class="{ active: userType === 'student' }"
@@ -21,13 +22,13 @@
       <form @submit.prevent="login">
         <!-- Mobile number input -->
         <div class="form-group">
-          <label for="phone">Mobile Number</label>
-          <div class="phone-input-container">
+          <label for="email">Entrer Email</label>
+          <div class="email-input-container">
             <input
               type="text"
-              id="phone"
-              v-model="form.phone"
-              placeholder="Enter your mobile number"
+              id="email"
+              v-model="form.email"
+              placeholder="Enter your email "
               required
             />
             <button type="button" @click="sendOtp" class="btn-send-otp">
@@ -38,11 +39,14 @@
 
         <!-- OTP input will be shown only if OTP has been sent -->
         <div class="form-group" v-show="otpSent">
-          <label for="otp">OTP</label>
+          <label for="verification_code
+">OTP</label>
           <input
             type="text"
-            id="otp"
-            v-model="form.otp"
+            id="verification_code
+"
+            v-model="form.verification_code
+"
             placeholder="Enter the OTP"
             required
           />
@@ -75,8 +79,9 @@ export default {
     return {
       userType: "student", // Default to student
       form: {
-        phone: "",
-        otp: "",
+        email: "",
+        verification_code
+: "",
       },
       otpSent: false, // Initially OTP has not been sent
       message: "",
@@ -102,17 +107,17 @@ export default {
     },
     async sendOtp() {
       this.clearMessages();
-      if (!this.form.phone) {
+      if (!this.form.email) {
         this.message = "Please enter a valid mobile number.";
         this.messageType = "error";
         return;
       }
       try {
-        const apiUrl = "https://api.interview-companion.com/api/send-otp";
+        const apiUrl = "http://localhost:8000/api/send-email-verification";
 
         // Send OTP to mobile number for both student and expert
         const response = await axios.post(apiUrl, {
-          mobileNumber: this.form.phone,
+          email: this.form.email,
         });
 
         if (response.data) {
@@ -133,8 +138,7 @@ export default {
     async verifyOtp() {
       this.clearMessages(); // Clear previous messages
       try {
-        const apiUrl =
-          "https://api.interview-companion.com/api/verify-otp";
+        const apiUrl = "http://localhost:8000/api/verify-email-code";
 
         // Retrieve the JWT token from localStorage (or Vuex if using it for state management)
         const token = localStorage.getItem("token"); // Assuming the token is stored as 'token'
@@ -143,8 +147,10 @@ export default {
         const response = await axios.post(
           apiUrl,
           {
-            mobileNumber: this.form.phone,
-            otp: this.form.otp,
+            email: this.form.email,
+            verification_code
+: this.form.verification_code
+,
           },
           {
             headers: {
@@ -212,7 +218,7 @@ export default {
     async checkExpertPhoneExistence() {
       this.clearMessages();
       try {
-        const expertApi = `https://api.interview-companion.com/api/experts/check-phone/${this.form.phone}`;
+        const expertApi = `http://localhost:8000/api/experts/check-email/${this.form.email}`;
 
         const response = await axios.get(expertApi);
 
@@ -240,7 +246,11 @@ export default {
         } else {
           this.message = "No expert profile found for this phone number.";
           this.messageType = "error";
-        }
+          this.$router.push({
+            name:"ExpertRegister",
+             query: { email: this.form.email },
+          });
+                 }
       } catch (error) {
         this.message =
           error.response?.data?.message ||
@@ -248,11 +258,12 @@ export default {
         this.messageType = "error";
       }
     },
+    //
 
     async checkStudentPhoneExistence() {
       this.clearMessages();
       try {
-        const studentApi = `https://api.interview-companion.com/api/students/check-phone/${this.form.phone}`;
+        const studentApi = `http://localhost:8000/api/students/check-email/${this.form.email}`;
 
         const response = await axios.get(studentApi);
 
@@ -279,6 +290,10 @@ export default {
         } else {
           this.message = "No student profile found for this phone number.";
           this.messageType = "error";
+            this.$router.push({
+                name: "StudentRegister",
+                query: { email: this.form.email },
+              });
         }
       } catch (error) {
         this.message =
@@ -418,3 +433,4 @@ export default {
   color: green;
 }
 </style>
+

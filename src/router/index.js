@@ -26,8 +26,14 @@ import RegistrationForm from "@/components/RegistrationForm.vue";
 import StudentRegister from "@/components/StudentRegister.vue";
 import ExpertRegister from "@/components/ExpertRegister.vue";
 import ServicesPage from "@/components/ServicesPage.vue";
+import ContactUs from "@/components/ContactUs.vue";
 import DownloadAndriod from "@/components/DownloadAndriod.vue";
 import DownloadIos from "@/components/DownloadIos.vue";
+import TermsAndConditions from "@/components/TermsAndConditions.vue";
+import PrivacyPolicy from "@/components/PrivacyPolicy.vue";
+import LoginPage1 from "@/components/LoginPage1.vue";
+import CancellationAndRefund from "@/components/CancellationAndRefund.vue";
+import SkillPricing from "@/components/SkillPricing.vue";
 const routes = [
   {
     path: "/",
@@ -49,6 +55,32 @@ const routes = [
     name: "AboutUs",
     component: AboutUs,
   },
+  {
+    path:"/cancellation",
+    name:"CancellationAndRefund",
+    component:CancellationAndRefund,
+  },
+  {
+    path:"/pricing",
+    name:"SkillPricing",
+    component:SkillPricing,
+  },
+ {
+  path:"/contact",
+  name:"ContactUs",
+  component: ContactUs,
+ },
+ {
+  path: "/terms-and-conditions",
+  name: "TermsAndConditions",
+  component: TermsAndConditions,
+},
+{
+  path: "/privacy-policy",
+  name: "PrivacyPolicy",
+  component: PrivacyPolicy,
+},
+
   {
     path: "/download-android",
     name: "DownloadAndriod",
@@ -83,6 +115,11 @@ const routes = [
     path: "/login",
     name: "login",
     component: LoginPage, // This route should point to your LoginPage component
+  },
+  {
+    path:"/login-page",
+    name:"LoginPage1",
+    component: LoginPage1,
   },
   {
     path: "/students/:studentId",
