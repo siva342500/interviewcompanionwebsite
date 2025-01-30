@@ -113,7 +113,7 @@ export default {
         return;
       }
       try {
-        const apiUrl = "http://localhost:8000/api/send-email-verification";
+        const apiUrl = "https://api.interview-companion.com/api/send-email-verification";
 
         // Send OTP to mobile number for both student and expert
         const response = await axios.post(apiUrl, {
@@ -138,7 +138,7 @@ export default {
     async verifyOtp() {
       this.clearMessages(); // Clear previous messages
       try {
-        const apiUrl = "http://localhost:8000/api/verify-email-code";
+        const apiUrl = "https://api.interview-companion.com/api/verify-email-code";
 
         // Retrieve the JWT token from localStorage (or Vuex if using it for state management)
         const token = localStorage.getItem("token"); // Assuming the token is stored as 'token'
@@ -218,7 +218,7 @@ export default {
     async checkExpertPhoneExistence() {
       this.clearMessages();
       try {
-        const expertApi = `http://localhost:8000/api/experts/check-email/${this.form.email}`;
+        const expertApi = `https://api.interview-companion.com/api/experts/check-email/${this.form.email}`;
 
         const response = await axios.get(expertApi);
 
@@ -263,7 +263,7 @@ export default {
     async checkStudentPhoneExistence() {
       this.clearMessages();
       try {
-        const studentApi = `http://localhost:8000/api/students/check-email/${this.form.email}`;
+        const studentApi = `https://api.interview-companion.com/api/students/check-email/${this.form.email}`;
 
         const response = await axios.get(studentApi);
 
